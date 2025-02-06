@@ -1,15 +1,16 @@
-package com.sukajee.feature_item_domain.data.repository
+package com.sukajee.domain.data.repository
 
-import com.sukajee.feature_item_domain.data.model.Item
-import com.sukajee.feature_item_domain.service.ItemsService
-import com.sukajee.feature_item_domain.service.RetrofitInstance
+import com.sukajee.domain.data.model.Item
+import com.sukajee.domain.service.ItemsService
+import com.sukajee.domain.service.RetrofitInstance
+import com.sukajee.domain.util.Result
 
 interface ItemRepository {
     suspend fun getItems(): Result<List<Item>>
 }
 
 class ItemRepositoryImpl(
-    val api: ItemsService = RetrofitInstance.api
+    private val api: ItemsService = RetrofitInstance.api
 ): ItemRepository {
     override suspend fun getItems(): Result<List<Item>> {
         return try {
@@ -26,10 +27,3 @@ class ItemRepositoryImpl(
         }
     }
 }
-
-
-sealed class Result<out T> {
-    data class Success<out T>(val data: T) : Result<T>()
-    data class Error(val message: String, val throwable: Throwable? = null): Result<Nothing>()
-}
-

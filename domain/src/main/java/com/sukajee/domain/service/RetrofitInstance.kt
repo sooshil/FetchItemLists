@@ -1,4 +1,4 @@
-package com.sukajee.feature_item_domain.service
+package com.sukajee.domain.service
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

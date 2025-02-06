@@ -1,4 +1,4 @@
-package com.sukajee.feature_item_domain.data.model
+package com.sukajee.domain.data.model
 
 data class Item(
     val id: Int,
