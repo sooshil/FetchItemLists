@@ -1,4 +1,4 @@
-package com.sukajee.feature_item_android
+package com.sukajee.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

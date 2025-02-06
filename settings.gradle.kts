@@ -21,5 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "FetchList"
 include(":app")
-include(":feature-item-android")
-include(":feature-item-domain")
+include(":presentation")
+include(":domain")

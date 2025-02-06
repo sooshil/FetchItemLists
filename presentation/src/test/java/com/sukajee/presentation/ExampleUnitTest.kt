@@ -1,4 +1,4 @@
-package com.sukajee.feature_item_android
+package com.sukajee.presentation
 
 import org.junit.Test
 
