@@ -50,7 +50,7 @@ class ItemsViewModel(
     private fun List<Item>.filteredData(): Map<Int, List<Item>> {
         return this
             .filterNot { it.name.isNullOrEmpty()}
-            .sortedBy { it.name?.trim() }
+            .sortedBy { it.name }
             .sortedBy { it.listId }
             .groupBy { it.listId }
     }

@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 @OptIn(ExperimentalCoroutinesApi::class)
 class ItemsViewModelTest {
 
-    private lateinit var viewModel: ItemsViewModel
     private val testDispatcher = StandardTestDispatcher()
     private val repository: ItemRepository = mockk<ItemRepository>()
 
@@ -141,5 +140,4 @@ class ItemsViewModelTest {
         assertEquals(2, state.itemsMap.keys.first())
         assertEquals("Item 300", state.itemsMap[2]?.get(0)?.name)
     }
-
 }
