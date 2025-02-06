@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -42,25 +44,47 @@ fun ItemsScreen(
     modifier: Modifier = Modifier
 ) {
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize()
-    ) {
-        state.itemsMap.forEach { (listId, items) ->
-            stickyHeader {
-                HeaderRow(listId.toString())
+    if (state.isLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    } else {
+        state.errorMessage?.let { message ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = message,
+                    style = typography.headlineMedium,
+                    color = colors.onTertiaryContainer
+                )
             }
-            val lastItem = items.lastOrNull()
-            items(
-                items = items,
-                key = {
-                    it.id
+        }
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            state = rememberLazyListState()
+        ) {
+            state.itemsMap.forEach { (listId, items) ->
+                stickyHeader {
+                    HeaderRow(listId.toString())
                 }
-            ) { item ->
-                item.name?.let { name ->
-                    NameRow(
-                        name = name,
-                        isLastName = name == lastItem?.name
-                    )
+                val lastItem = items.lastOrNull()
+                items(
+                    items = items,
+                    key = {
+                        it.id
+                    }
+                ) { item ->
+                    item.name?.let { name ->
+                        NameRow(
+                            name = name,
+                            isLastName = name == lastItem?.name
+                        )
+                    }
                 }
             }
         }
