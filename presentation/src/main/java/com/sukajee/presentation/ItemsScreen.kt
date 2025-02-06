@@ -1,5 +1,6 @@
 package com.sukajee.presentation
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,25 +26,32 @@ fun ItemsScreenRoot(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ItemsScreen(
     state: UiState,
     modifier: Modifier = Modifier
 ) {
+
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
-        items(
-            items = state.items,
-            key = {
-                it.id
+        state.itemsMap.forEach { (listId, items) ->
+            stickyHeader {
+                Text(text = listId.toString())
             }
-        ) { item ->
-            item.name?.let { name ->
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = name
-                )
+            items(
+                items = items,
+                key = {
+                    it.id
+                }
+            ) { item ->
+                item.name?.let { name ->
+                    Text(
+                        modifier = Modifier.padding(16.dp),
+                        text = name
+                    )
+                }
             }
         }
     }

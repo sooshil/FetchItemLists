@@ -2,19 +2,17 @@ package com.sukajee.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sukajee.domain.data.model.Item
 import com.sukajee.domain.data.repository.ItemRepository
 import com.sukajee.domain.data.repository.ItemRepositoryImpl
 import com.sukajee.domain.util.Result
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ItemsViewModel(
-    private val repository: ItemRepository = ItemRepositoryImpl(),
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val repository: ItemRepository = ItemRepositoryImpl()
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -25,14 +23,14 @@ class ItemsViewModel(
     }
 
     private fun fetchItems() {
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch {
             when(val itemResponse = repository.getItems()) {
                 is Result.Error -> {
                     _uiState.update { currentState ->
                         currentState.copy(
                             errorMessage = itemResponse.message,
                             isLoading = false,
-                            items = emptyList()
+                            itemsMap = emptyMap()
                         )
                     }
                 }
@@ -41,7 +39,7 @@ class ItemsViewModel(
                         currentState.copy(
                             errorMessage = null,
                             isLoading = false,
-                            items = itemResponse.data
+                            itemsMap = itemResponse.data.filteredData()
                         )
                     }
                 }
@@ -49,4 +47,11 @@ class ItemsViewModel(
         }
     }
 
+    private fun List<Item>.filteredData(): Map<Int, List<Item>> {
+        return this
+            .filter { it.name.isNullOrEmpty().not()}
+            .sortedBy { it.name }
+            .sortedBy { it.listId }
+            .groupBy { it.listId }
+    }
 }
