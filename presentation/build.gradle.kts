@@ -51,8 +51,9 @@ dependencies {
 
     implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.runtime.compose)
-    implementation(libs.test.mockk)
-    implementation(libs.test.kotlin.coroutines)
+
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.kotlin.coroutines)
 
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter)

@@ -64,7 +64,7 @@ fun ItemsScreen(
                 Text(
                     text = message,
                     style = typography.headlineMedium,
-                    color = colors.onTertiaryContainer
+                    color = colors.onBackground
                 )
             }
         }

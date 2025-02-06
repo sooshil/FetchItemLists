@@ -22,6 +22,11 @@ class ItemsViewModel(
         fetchItems()
     }
 
+    /**
+     * A function that fetches data from api calling a function from repository.
+     * Once the response is received, it will update the uiState
+     * with the appropriate state variable.
+     * */
     private fun fetchItems() {
         viewModelScope.launch {
             when(val itemResponse = repository.getItems()) {
@@ -47,6 +52,12 @@ class ItemsViewModel(
         }
     }
 
+    /**
+     * A function to filter and sort the list of items.
+     * This will not include the item having the name null or empty.
+     * This will sort the list by listId and then name of a item.
+     * This will return a map of Int (listId) to List<Item>
+     * */
     private fun List<Item>.filteredData(): Map<Int, List<Item>> {
         return this
             .filterNot { it.name.isNullOrEmpty()}
