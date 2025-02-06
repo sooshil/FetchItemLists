@@ -46,7 +46,9 @@ fun ItemsScreen(
 
     if (state.isLoading) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
@@ -54,7 +56,9 @@ fun ItemsScreen(
     } else {
         state.errorMessage?.let { message ->
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
