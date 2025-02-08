@@ -12,6 +12,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/itemlist" />
+            <option value="$PROJECT_DIR$/itemlist/data" />
+            <option value="$PROJECT_DIR$/itemlist/domain" />
+            <option value="$PROJECT_DIR$/itemlist/presentation" />
             <option value="$PROJECT_DIR$/presentation" />
           </set>
         </option>
