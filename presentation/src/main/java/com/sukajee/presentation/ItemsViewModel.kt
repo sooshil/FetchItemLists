@@ -61,7 +61,7 @@ class ItemsViewModel(
     private fun List<Item>.filteredData(): Map<Int, List<Item>> {
         return this
             .filterNot { it.name.isNullOrEmpty()}
-            .sortedBy { it.name?.substringAfter(" ")?.toInt() }
+            .sortedBy { it.name?.substringAfter(" ")?.toIntOrNull() }
             .sortedBy { it.listId }
             .groupBy { it.listId }
     }
