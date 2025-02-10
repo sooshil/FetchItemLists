@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.sukajee.presentation.ItemsScreenRoot
 import com.sukajee.fetchlist.ui.theme.FetchListTheme
+import com.sukajee.itemlist.presentation.ItemsScreenRoot
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
